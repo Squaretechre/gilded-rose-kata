@@ -159,6 +159,25 @@ namespace GildedRose.Tests
             Assert.Equal(agedBrie.SellIn, expectedSellIn);
         }
 
+        [Theory]
+        [InlineData(27, 50, -25)]
+        [InlineData(50, 50, -48)]
+        [InlineData(100, 50, -98)]
+        public void never_increase_aged_brie_quality_above_maximum_quality_of_50(int timesToUpdateQualityBy, int expectedQuality, int expectedSellIn)
+        {
+            var program = Program.CreateProgram();
+
+            for (var i = 0; i < timesToUpdateQualityBy; i++)
+            {
+                program.UpdateQuality();
+            }
+
+            var agedBrie = program.Item(ShopItem.AgedBrie);
+
+            Assert.Equal(agedBrie.Quality, expectedQuality);
+            Assert.Equal(agedBrie.SellIn, expectedSellIn);
+        }
+
         [Fact]
         public void never_decrease_sulfuras_item_sell_in_when_quality_is_updated()
         {
