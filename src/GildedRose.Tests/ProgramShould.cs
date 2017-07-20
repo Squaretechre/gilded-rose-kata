@@ -51,6 +51,19 @@ namespace GildedRose.Tests
         }
 
         [Fact]
+        public void not_decrease_legendary_item_sell_in_when_updated()
+        {
+            var program = Program.CreateProgram();
+            program.UpdateQuality();
+
+            var sulfuras = program.Item(ShopItem.Sulfuras);
+
+            const int expectedSulfurasSellIn = 0;
+
+            Assert.Equal(expectedSulfurasSellIn, sulfuras.SellIn);
+        }
+
+        [Fact]
         public void decrease_items_sell_in_date_by_1_when_quality_is_updated()
         {
             var program = Program.CreateProgram();
@@ -63,14 +76,15 @@ namespace GildedRose.Tests
             var backstagePasses = program.Item(ShopItem.BackstagePasses);
             var conjuredManaCake = program.Item(ShopItem.ConjuredManaCake);
 
+            const int expectedDexterityVestSellIn = 9;
             const int expectedAgedBrieSellIn = 1;
             const int expectedMongooseSellIn = 4;
             const int expectedSulfurasSellIn = 0;
             const int expectedBackstagePassesSellIn = 14;
             const int expectedConjuredManaCakeSellIn = 2;
 
-            Assert.Equal(9, dexterityVest.SellIn); 
-            Assert.Equal(expectedAgedBrieSellIn, agedBrie.SellIn); 
+            Assert.Equal(expectedDexterityVestSellIn, dexterityVest.SellIn);
+            Assert.Equal(expectedAgedBrieSellIn, agedBrie.SellIn);
             Assert.Equal(expectedMongooseSellIn, elixirOfTheMongoose.SellIn);
             Assert.Equal(expectedSulfurasSellIn, sulfuras.SellIn);
             Assert.Equal(expectedBackstagePassesSellIn, backstagePasses.SellIn);
