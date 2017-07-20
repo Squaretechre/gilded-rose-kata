@@ -36,12 +36,14 @@ namespace GildedRose.Tests
             var program = Program.CreateProgram();
             program.UpdateQuality();
 
+            var dexterityVest = program.ItemsProxy()[0];
             var elixirOfTheMongoose = program.ItemsProxy()[2];
-            var actualQuality = elixirOfTheMongoose.Quality;
 
-            const int expectedQuality = 6;
+            const int expectedMongooseQuality = 6;
+            const int expectedDexterityVestQuality = 19;
 
-            Assert.Equal(expectedQuality, actualQuality);
+            Assert.Equal(expectedDexterityVestQuality, dexterityVest.Quality);
+            Assert.Equal(expectedMongooseQuality, elixirOfTheMongoose.Quality);
         }
     }
 }
