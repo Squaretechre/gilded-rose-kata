@@ -2,7 +2,7 @@
 
 namespace GildedRose.Console
 {
-    class Program
+    public class Program
     {
         IList<Item> Items;
 
@@ -18,7 +18,7 @@ namespace GildedRose.Console
 
         }
 
-        private static Program CreateProgram()
+        public static Program CreateProgram()
         {
             return new Program()
             {
@@ -38,6 +38,11 @@ namespace GildedRose.Console
                 }
 
             };
+        }
+
+        public IList<Item> ItemsProxy()
+        {
+            return Items;
         }
 
         public void UpdateQuality()

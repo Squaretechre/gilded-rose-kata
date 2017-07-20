@@ -1,3 +1,6 @@
+using GildedRose.Console;
+using Xunit;
+
 namespace GildedRose.Tests
 {
     public class ProgramShould
@@ -26,5 +29,19 @@ namespace GildedRose.Tests
             - Just for clarification, an item can never have its Quality increase above 50, however 
               "Sulfuras" is a legendary item and as such its Quality is 80 and it never alters.
         */
+
+        [Fact]
+        public void decrease_ordinary_item_quality_by_1_when_quality_is_updated()
+        {
+            var program = Program.CreateProgram();
+            program.UpdateQuality();
+
+            var elixirOfTheMongoose = program.ItemsProxy()[2];
+            var actualQuality = elixirOfTheMongoose.Quality;
+
+            const int expectedQuality = 6;
+
+            Assert.Equal(expectedQuality, actualQuality);
+        }
     }
 }
