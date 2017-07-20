@@ -10,7 +10,7 @@ namespace GildedRose.Tests
             - All items have a Quality value which denotes how valuable the item is
             - At the end of each day our system lowers both values for every item
 
-            - "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
+            ✓ "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
             ✓- The Quality of an item is never negative
             - The Quality of an item is never more than 50
             - Once the sell by date has passed, Quality degrades twice as fast
@@ -115,6 +115,23 @@ namespace GildedRose.Tests
             Assert.False(sulfuras.Quality < 0);
             Assert.False(backstagePasses.Quality < 0);
             Assert.False(conjuredManaCake.Quality < 0);
+        }
+
+        [Fact]
+        public void not_increase_quality_of_an_item_above_maximum_quality_of_50()
+        {
+            var program = Program.CreateProgram();
+
+            const int maximumItemQuality = 50;
+            const int daysToUpdateQualityBy = maximumItemQuality + 1;
+            for (var i = 0; i < daysToUpdateQualityBy; i++)
+            {
+                program.UpdateQuality();
+            }
+
+            var agedBrie = program.Item(ShopItem.AgedBrie);
+            
+            Assert.Equal(agedBrie.Quality, 50);
         }
     }
 }
