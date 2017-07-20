@@ -1,4 +1,4 @@
-using GildedRose.Console;
+﻿using GildedRose.Console;
 using Xunit;
 
 namespace GildedRose.Tests
@@ -10,11 +10,11 @@ namespace GildedRose.Tests
             - All items have a Quality value which denotes how valuable the item is
             - At the end of each day our system lowers both values for every item
 
-            - Once the sell by date has passed, Quality degrades twice as fast
-            - The Quality of an item is never negative
-            - "Aged Brie" actually increases in Quality the older it gets
-            - The Quality of an item is never more than 50
             - "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
+            ✓- The Quality of an item is never negative
+            - The Quality of an item is never more than 50
+            - Once the sell by date has passed, Quality degrades twice as fast
+            - "Aged Brie" actually increases in Quality the older it gets
             
             - "Backstage passes", like aged brie, increases in Quality as it's SellIn value approaches; 
                 -   Quality increases by 2 when there are 10 days or less 
@@ -51,19 +51,30 @@ namespace GildedRose.Tests
         }
 
         [Fact]
-        public void decrease_ordinary_items_sell_in_date_by_1_when_quality_is_updated()
+        public void decrease_items_sell_in_date_by_1_when_quality_is_updated()
         {
             var program = Program.CreateProgram();
             program.UpdateQuality();
 
             var dexterityVest = program.Item(ShopItem.DexterityVest);
+            var agedBrie = program.Item(ShopItem.AgedBrie);
             var elixirOfTheMongoose = program.Item(ShopItem.ElixirOfTheMongoose);
+            var sulfuras = program.Item(ShopItem.Sulfuras);
+            var backstagePasses = program.Item(ShopItem.BackstagePasses);
+            var conjuredManaCake = program.Item(ShopItem.ConjuredManaCake);
 
-            const int expectedDexterityVestSellIn = 9;
+            const int expectedAgedBrieSellIn = 1;
             const int expectedMongooseSellIn = 4;
+            const int expectedSulfurasSellIn = 0;
+            const int expectedBackstagePassesSellIn = 14;
+            const int expectedConjuredManaCakeSellIn = 2;
 
-            Assert.Equal(expectedDexterityVestSellIn, dexterityVest.SellIn); 
+            Assert.Equal(9, dexterityVest.SellIn); 
+            Assert.Equal(expectedAgedBrieSellIn, agedBrie.SellIn); 
             Assert.Equal(expectedMongooseSellIn, elixirOfTheMongoose.SellIn);
+            Assert.Equal(expectedSulfurasSellIn, sulfuras.SellIn);
+            Assert.Equal(expectedBackstagePassesSellIn, backstagePasses.SellIn);
+            Assert.Equal(expectedConjuredManaCakeSellIn, conjuredManaCake.SellIn);
         }
 
         [Fact]
