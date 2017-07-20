@@ -45,6 +45,19 @@ namespace GildedRose.Console
             return Items;
         }
 
+        public Dictionary<ShopItem, Item> ItemsDictionary()
+        {
+            return new Dictionary<ShopItem, Item>()
+            {
+                { ShopItem.DexterityVest, Items[0] },
+                { ShopItem.AgedBrie, Items[1] },
+                { ShopItem.ElixirOfTheMongoose, Items[2] },
+                { ShopItem.Sulfuras, Items[3] },
+                { ShopItem.BackstagePasses, Items[4] },
+                { ShopItem.ConjuredManaCake, Items[5] }
+            };
+        }
+
         public void UpdateQuality()
         {
             for (var i = 0; i < Items.Count; i++)
