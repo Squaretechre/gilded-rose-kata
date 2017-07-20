@@ -6,7 +6,7 @@ namespace GildedRose.Tests
     public class ProgramShould
     {
         /*
-            - All items have a SellIn value which denotes the number of days we have to sell the item
+            - All items have a SellIn value which denotes the number of times we have to sell the item
             - All items have a Quality value which denotes how valuable the item is
             - At the end of each day our system lowers both values for every item
 
@@ -17,21 +17,20 @@ namespace GildedRose.Tests
             - Once the sell by date has passed, Quality degrades twice as fast
             
             - "Backstage passes", like aged brie, increases in Quality as it's SellIn value approaches; 
-                -   Quality increases by 2 when there are 10 days or less 
-                -   By 3 when there are 5 days or less
+                -   Quality increases by 2 when there are 10 times or less 
+                -   By 3 when there are 5 times or less
                 -   Quality drops to 0 after the concert
             
             - "Conjured" items degrade in Quality twice as fast as normal items
 
+            ✓ Just for clarification, an item can never have its Quality increase above 50, however 
+              "Sulfuras" is a legendary item and as such its Quality is 80 and it never alters.
 
             - Feel free to make any changes to the UpdateQuality method and add any new code as long as 
               everything still works correctly. However, do not alter the Item class or Items property as 
               those belong to the goblin in the corner who will insta-rage and one-shot you as he doesn't 
               believe in shared code ownership (you can make the UpdateQuality method and Items property 
               static if you like, we'll cover for you).
-
-            - Just for clarification, an item can never have its Quality increase above 50, however 
-              "Sulfuras" is a legendary item and as such its Quality is 80 and it never alters.
         */
 
         [Fact]
@@ -83,8 +82,8 @@ namespace GildedRose.Tests
         {
             var program = Program.CreateProgram();
 
-            const int numberOfDaysToUpdateQualityBy = 80;
-            for (var i = 0; i < numberOfDaysToUpdateQualityBy; i++)
+            const int numberOftimesToUpdateQualityBy = 80;
+            for (var i = 0; i < numberOftimesToUpdateQualityBy; i++)
             {
                program.UpdateQuality(); 
             }
@@ -110,8 +109,8 @@ namespace GildedRose.Tests
             var program = Program.CreateProgram();
 
             const int maximumItemQuality = 50;
-            const int daysToUpdateQualityBy = maximumItemQuality + 1;
-            for (var i = 0; i < daysToUpdateQualityBy; i++)
+            const int timesToUpdateQualityBy = maximumItemQuality + 1;
+            for (var i = 0; i < timesToUpdateQualityBy; i++)
             {
                 program.UpdateQuality();
             }
@@ -119,6 +118,24 @@ namespace GildedRose.Tests
             var agedBrie = program.Item(ShopItem.AgedBrie);
             
             Assert.Equal(agedBrie.Quality, 50);
+        }
+
+        [Theory]
+        [InlineData(1, 1, 1)]
+        [InlineData(2, 2, 0)]
+        public void increase_the_quality_of_aged_brie_by_1_when_sell_in_not_negative(int timesToUpdateQualityBy, int expectedQuality, int expectedSellIn)
+        {
+            var program = Program.CreateProgram();
+
+            for (var i = 0; i < timesToUpdateQualityBy; i++)
+            {
+                program.UpdateQuality();
+            }
+
+            var agedBrie = program.Item(ShopItem.AgedBrie);
+            
+            Assert.Equal(agedBrie.Quality, expectedQuality);
+            Assert.Equal(agedBrie.SellIn, expectedSellIn);
         }
 
         [Fact]
@@ -134,15 +151,14 @@ namespace GildedRose.Tests
             Assert.Equal(expectedSulfurasSellIn, sulfuras.SellIn);
         }
 
-
         [Fact]
         public void never_change_quality_of_sulfuras_when_quality_is_updated()
         {
             var program = Program.CreateProgram();
             var sulfuras = program.Item(ShopItem.Sulfuras);
 
-            const int daysToUpdateQualityBy = 100;
-            for (var i = 0; i < daysToUpdateQualityBy; i++)
+            const int timesToUpdateQualityBy = 100;
+            for (var i = 0; i < timesToUpdateQualityBy; i++)
             {
                 program.UpdateQuality();
             }
