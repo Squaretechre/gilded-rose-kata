@@ -40,8 +40,8 @@ namespace GildedRose.Tests
             var program = Program.CreateProgram();
             program.UpdateQuality();
 
-            var dexterityVest = program.ItemsDictionary()[ShopItem.DexterityVest];
-            var elixirOfTheMongoose = program.ItemsDictionary()[ShopItem.ElixirOfTheMongoose];
+            var dexterityVest = program.Item(ShopItem.DexterityVest);
+            var elixirOfTheMongoose = program.Item(ShopItem.ElixirOfTheMongoose);
 
             const int expectedMongooseQuality = 6;
             const int expectedDexterityVestQuality = 19;
@@ -56,8 +56,8 @@ namespace GildedRose.Tests
             var program = Program.CreateProgram();
             program.UpdateQuality();
 
-            var dexterityVest = program.ItemsDictionary()[ShopItem.DexterityVest];
-            var elixirOfTheMongoose = program.ItemsDictionary()[ShopItem.ElixirOfTheMongoose];
+            var dexterityVest = program.Item(ShopItem.DexterityVest);
+            var elixirOfTheMongoose = program.Item(ShopItem.ElixirOfTheMongoose);
 
             const int expectedDexterityVestSellIn = 9;
             const int expectedMongooseSellIn = 4;

@@ -40,23 +40,15 @@ namespace GildedRose.Console
             };
         }
 
-        public IList<Item> ItemsProxy()
+        public Item Item(ShopItem item) => new Dictionary<ShopItem, Item>()
         {
-            return Items;
-        }
-
-        public Dictionary<ShopItem, Item> ItemsDictionary()
-        {
-            return new Dictionary<ShopItem, Item>()
-            {
-                { ShopItem.DexterityVest, Items[0] },
-                { ShopItem.AgedBrie, Items[1] },
-                { ShopItem.ElixirOfTheMongoose, Items[2] },
-                { ShopItem.Sulfuras, Items[3] },
-                { ShopItem.BackstagePasses, Items[4] },
-                { ShopItem.ConjuredManaCake, Items[5] }
-            };
-        }
+            { ShopItem.DexterityVest, Items[0] },
+            { ShopItem.AgedBrie, Items[1] },
+            { ShopItem.ElixirOfTheMongoose, Items[2] },
+            { ShopItem.Sulfuras, Items[3] },
+            { ShopItem.BackstagePasses, Items[4] },
+            { ShopItem.ConjuredManaCake, Items[5] }
+        }[item];
 
         public void UpdateQuality()
         {
