@@ -65,5 +65,31 @@ namespace GildedRose.Tests
             Assert.Equal(expectedDexterityVestSellIn, dexterityVest.SellIn); 
             Assert.Equal(expectedMongooseSellIn, elixirOfTheMongoose.SellIn);
         }
+
+        [Fact]
+        public void never_reduce_an_items_quality_so_that_it_is_negative()
+        {
+            var program = Program.CreateProgram();
+
+            const int numberOfDaysToUpdateQualityBy = 80;
+            for (var i = 0; i < numberOfDaysToUpdateQualityBy; i++)
+            {
+               program.UpdateQuality(); 
+            }
+
+            var dexterityVest = program.Item(ShopItem.DexterityVest);
+            var agedBrie = program.Item(ShopItem.AgedBrie);
+            var elixirOfTheMongoose = program.Item(ShopItem.ElixirOfTheMongoose);
+            var sulfuras = program.Item(ShopItem.Sulfuras);
+            var backstagePasses = program.Item(ShopItem.BackstagePasses);
+            var conjuredManaCake = program.Item(ShopItem.ConjuredManaCake);
+
+            Assert.False(dexterityVest.Quality < 0);
+            Assert.False(agedBrie.Quality < 0);
+            Assert.False(elixirOfTheMongoose.Quality < 0);
+            Assert.False(sulfuras.Quality < 0);
+            Assert.False(backstagePasses.Quality < 0);
+            Assert.False(conjuredManaCake.Quality < 0);
+        }
     }
 }
