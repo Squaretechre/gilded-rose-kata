@@ -11,10 +11,10 @@ namespace GildedRose.Tests
             - At the end of each day our system lowers both values for every item
 
             ✓ "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
-            ✓- The Quality of an item is never negative
-            - The Quality of an item is never more than 50
-            - Once the sell by date has passed, Quality degrades twice as fast
+            ✓ The Quality of an item is never negative
+            ✓ The Quality of an item is never more than 50
             - "Aged Brie" actually increases in Quality the older it gets
+            - Once the sell by date has passed, Quality degrades twice as fast
             
             - "Backstage passes", like aged brie, increases in Quality as it's SellIn value approaches; 
                 -   Quality increases by 2 when there are 10 days or less 
@@ -48,19 +48,6 @@ namespace GildedRose.Tests
 
             Assert.Equal(expectedDexterityVestQuality, dexterityVest.Quality);
             Assert.Equal(expectedMongooseQuality, elixirOfTheMongoose.Quality);
-        }
-
-        [Fact]
-        public void not_decrease_legendary_item_sell_in_when_updated()
-        {
-            var program = Program.CreateProgram();
-            program.UpdateQuality();
-
-            var sulfuras = program.Item(ShopItem.Sulfuras);
-
-            const int expectedSulfurasSellIn = 0;
-
-            Assert.Equal(expectedSulfurasSellIn, sulfuras.SellIn);
         }
 
         [Fact]
@@ -132,6 +119,35 @@ namespace GildedRose.Tests
             var agedBrie = program.Item(ShopItem.AgedBrie);
             
             Assert.Equal(agedBrie.Quality, 50);
+        }
+
+        [Fact]
+        public void never_decrease_sulfuras_item_sell_in_when_quality_is_updated()
+        {
+            var program = Program.CreateProgram();
+            program.UpdateQuality();
+
+            var sulfuras = program.Item(ShopItem.Sulfuras);
+
+            const int expectedSulfurasSellIn = 0;
+
+            Assert.Equal(expectedSulfurasSellIn, sulfuras.SellIn);
+        }
+
+
+        [Fact]
+        public void never_change_quality_of_sulfuras_when_quality_is_updated()
+        {
+            var program = Program.CreateProgram();
+            var sulfuras = program.Item(ShopItem.Sulfuras);
+
+            const int daysToUpdateQualityBy = 100;
+            for (var i = 0; i < daysToUpdateQualityBy; i++)
+            {
+                program.UpdateQuality();
+            }
+
+            Assert.Equal(sulfuras.Quality, 80);
         }
     }
 }
