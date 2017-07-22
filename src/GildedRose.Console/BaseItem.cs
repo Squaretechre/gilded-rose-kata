@@ -22,9 +22,9 @@ namespace GildedRose.Console
 
             if (itemIsSulfuras) return;
 
-            var itemQualityAboveZero = Quality > 0;
-            var itemQualityBelowMaxQuality = Quality < MaxItemQuality;
-            var itemIsOverMaxQuality = !itemQualityBelowMaxQuality;
+            var itemQualityAboveZero = ItemQualityAboveZero();
+            var itemQualityBelowMaxQuality = ItemQualityBelowMaxQuality();
+            var itemIsOverMaxQuality = ItemIsOverMaxQuality();
 
             SellIn = SellIn - 1;
 
@@ -77,6 +77,21 @@ namespace GildedRose.Console
             {
                 Quality = MaxItemQuality;
             }
+        }
+
+        private bool ItemIsOverMaxQuality()
+        {
+            return !ItemQualityBelowMaxQuality();
+        }
+
+        private bool ItemQualityBelowMaxQuality()
+        {
+            return Quality < MaxItemQuality;
+        }
+
+        private bool ItemQualityAboveZero()
+        {
+            return Quality > 0;
         }
     }
 }
