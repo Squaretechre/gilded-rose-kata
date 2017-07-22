@@ -2,17 +2,34 @@ namespace GildedRose.Console
 {
     public class BaseItem : Item
     {
+        private int _quality;
         private const int MaxItemQuality = 50;
+        private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
+        private const string AgedBrie = "Aged Brie";
+        private const string BackstagePasses = "Backstage passes to a TAFKAL80ETC concert";
+
+        public new int Quality
+        {
+            get
+            {
+                if (_quality > MaxItemQuality && Name != SulfurasHandOfRagnaros)
+                {
+                    _quality = MaxItemQuality;
+                }
+                return _quality;
+            }
+            set => _quality = value;
+        }
 
         public void UpdateQuality()
         {
-            var itemIsNotAgedBrie = Name != "Aged Brie";
-            var itemIsNotSulfuras = Name != "Sulfuras, Hand of Ragnaros";
-            var itemIsNotBackstagePasses = Name != "Backstage passes to a TAFKAL80ETC concert";
+            var itemIsNotAgedBrie = Name != AgedBrie;
+            var itemIsNotSulfuras = Name != SulfurasHandOfRagnaros;
+            var itemIsNotBackstagePasses = Name != BackstagePasses;
 
-            var itemIsBackstagePasses = Name == "Backstage passes to a TAFKAL80ETC concert";
-            var itemIsSulfuras = Name == "Sulfuras, Hand of Ragnaros";
-            var itemIsAgedBrie = Name == "Aged Brie";
+            var itemIsBackstagePasses = Name == BackstagePasses;
+            var itemIsSulfuras = Name == SulfurasHandOfRagnaros;
+            var itemIsAgedBrie = Name == AgedBrie;
 
             var currenItemIsNormalItem = itemIsNotSulfuras &&
                                          itemIsNotAgedBrie &&
@@ -35,11 +52,6 @@ namespace GildedRose.Console
             }
 
             UpdateBackstagePasses(itemIsBackstagePasses);
-
-            if (Quality > MaxItemQuality)
-            {
-                Quality = MaxItemQuality;
-            }
         }
 
         private void UpdateNormalItem(bool currenItemIsNormalItem)
