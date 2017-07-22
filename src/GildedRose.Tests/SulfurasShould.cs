@@ -30,7 +30,7 @@ namespace GildedRose.Tests
             var program = new ProgramBuilder().WithUpdatedQuality(100).Build();
             var sulfuras = program.Item(ShopItem.Sulfuras);
 
-            Assert.Equal(sulfuras.Quality, 80);
+            Assert.Equal(80, sulfuras.Quality);
         }
     }
 }
