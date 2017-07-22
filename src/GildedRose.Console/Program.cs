@@ -69,6 +69,7 @@ namespace GildedRose.Console
 
                 var itemIsBackstagePasses = item.Name == "Backstage passes to a TAFKAL80ETC concert";
                 var itemIsSulfuras = item.Name == "Sulfuras, Hand of Ragnaros";
+                var itemIsAgedBrie = item.Name == "Aged Brie";
 
                 var currentItemIsNotNormalItem = !currenItemIsNormalItem;
 
@@ -76,7 +77,6 @@ namespace GildedRose.Console
                 {
                     item.Quality = item.Quality - 1;
                 }
-
 
                 if (currentItemIsNotNormalItem && item.Quality < maxItemQuality)
                 {
@@ -110,7 +110,7 @@ namespace GildedRose.Console
                     item.Quality = item.Quality - item.Quality;
                 }
 
-                if (item.Name == "Aged Brie" && item.Quality < maxItemQuality)
+                if (itemIsAgedBrie && item.Quality < maxItemQuality)
                 {
                     item.Quality = item.Quality + 1;
                 }
