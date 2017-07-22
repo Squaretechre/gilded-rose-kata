@@ -3,7 +3,7 @@ using Xunit;
 
 namespace GildedRose.Tests
 {
-    public class NormalItemShould
+    public class ItemNormalShould
     {
         /*
             - All items have a SellIn value which denotes the number of times we have to sell the item

@@ -57,13 +57,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AgedBrieShould.cs" />
-    <Compile Include="BackstagePassesShould.cs" />
+    <Compile Include="ItemAgedBrieShould.cs" />
+    <Compile Include="ItemBackstagePassesShould.cs" />
     <Compile Include="ConjuredItemsShould.cs" />
-    <Compile Include="NormalItemShould.cs" />
+    <Compile Include="ItemNormalShould.cs" />
     <Compile Include="ProgramBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SulfurasShould.cs" />
+    <Compile Include="ItemSulfurasShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

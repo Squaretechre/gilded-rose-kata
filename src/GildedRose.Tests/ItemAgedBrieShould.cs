@@ -3,7 +3,7 @@ using Xunit;
 
 namespace GildedRose.Tests
 {
-    public class AgedBrieShould
+    public class ItemAgedBrieShould
     {
         // ✓ "Aged Brie" actually increases in Quality the older it gets
 

@@ -3,7 +3,7 @@ using Xunit;
 
 namespace GildedRose.Tests
 {
-    public class SulfurasShould
+    public class ItemSulfurasShould
     {
         /*
             ✓ "Sulfuras", being a legendary item, never has to be sold or decreases in Quality

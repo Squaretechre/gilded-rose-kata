@@ -3,7 +3,7 @@ using Xunit;
 
 namespace GildedRose.Tests
 {
-    public class BackstagePassesShould
+    public class ItemBackstagePassesShould
     {
         /*
             - "Backstage passes", like aged brie, increases in Quality as it's SellIn value approaches; 
