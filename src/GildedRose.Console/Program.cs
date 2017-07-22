@@ -75,12 +75,14 @@ namespace GildedRose.Console
 
                 if (itemIsSulfuras) continue;
 
-                if (item.Quality > 0 && currenItemIsNormalItem)
+                var itemQualityAboveZero = item.Quality > 0;
+                var itemQualityBelowMaxQuality = item.Quality < maxItemQuality;
+
+                if (itemQualityAboveZero && currenItemIsNormalItem)
                 {
                     item.Quality = item.Quality - 1;
                 }
 
-                var itemQualityBelowMaxQuality = item.Quality < maxItemQuality;
                 if (currentItemIsNotNormalItem && itemQualityBelowMaxQuality)
                 {
                     item.Quality = item.Quality + 1;
@@ -97,13 +99,14 @@ namespace GildedRose.Console
                 }
 
                 item.SellIn = item.SellIn - 1;
+                itemQualityAboveZero = item.Quality > 0;
 
-                if (item.SellIn < 0 && itemIsNotAgedBrie && item.Quality > 0 && itemIsNotBackstagePasses && itemIsNotSulfuras)
+                if (item.SellIn < 0 && itemIsNotAgedBrie && itemQualityAboveZero && itemIsNotBackstagePasses && itemIsNotSulfuras)
                 {
                     item.Quality = item.Quality - 1;
                 }
 
-                if (item.SellIn < 0 && itemIsNotAgedBrie && item.Quality > 0 && itemIsBackstagePasses)
+                if (item.SellIn < 0 && itemIsNotAgedBrie && itemQualityAboveZero && itemIsBackstagePasses)
                 {
                     item.Quality = item.Quality - item.Quality;
                 }
@@ -114,7 +117,6 @@ namespace GildedRose.Console
                 }
             }
         }
-
     }
 
     public class Item
