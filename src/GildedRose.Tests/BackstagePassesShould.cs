@@ -26,13 +26,12 @@ namespace GildedRose.Tests
         }
 
         [Fact]
-        // should increase by 2 when 10 or less - bug?
-        public void increase_quality_by_1_when_sell_in_is_10()
+        public void increase_quality_by_2_when_sell_in_is_10()
         {
             var program = new ProgramBuilder().WithUpdatedQuality(5).Build();
             var passes = program.Item(ShopItem.BackstagePasses);
 
-            const int expectedQuality = 25;
+            const int expectedQuality = 26;
             const int expectedSellIn = 10;
 
             Assert.Equal(expectedQuality, passes.Quality);
@@ -40,10 +39,10 @@ namespace GildedRose.Tests
         }
 
         [Theory]
-        [InlineData(6, 27, 9)]
-        [InlineData(7, 29, 8)]
-        [InlineData(8, 31, 7)]
-        [InlineData(9, 33, 6)]
+        [InlineData(6, 28, 9)]
+        [InlineData(7, 30, 8)]
+        [InlineData(8, 32, 7)]
+        [InlineData(9, 34, 6)]
         public void increase_quality_by_2_when_sell_in_is_between_9_and_6(int timesToUpdateQualityBy, int expectedQuality, int expectedSellIn)
         {
             var program = new ProgramBuilder().WithUpdatedQuality(timesToUpdateQualityBy).Build();
@@ -54,13 +53,12 @@ namespace GildedRose.Tests
         }
 
         [Fact]
-        // should increase by 3 when 5 or less - bug?
-        public void increase_quality_by_2_when_sell_in_is_5()
+        public void increase_quality_by_3_when_sell_in_is_5()
         {
             var program = new ProgramBuilder().WithUpdatedQuality(10).Build();
             var passes = program.Item(ShopItem.BackstagePasses);
 
-            const int expectedQuality = 35;
+            const int expectedQuality = 37;
             const int expectedSellIn = 5;
 
             Assert.Equal(expectedQuality, passes.Quality);
@@ -68,10 +66,10 @@ namespace GildedRose.Tests
         }
 
         [Theory]
-        [InlineData(11, 38, 4)]
-        [InlineData(12, 41, 3)]
-        [InlineData(13, 44, 2)]
-        [InlineData(14, 47, 1)]
+        [InlineData(11, 40, 4)]
+        [InlineData(12, 43, 3)]
+        [InlineData(13, 46, 2)]
+        [InlineData(14, 49, 1)]
         [InlineData(15, 50, 0)]
         public void increase_quality_by_3_when_sell_in_is_between_4_and_0(int timesToUpdateQualityBy, int expectedQuality, int expectedSellIn)
         {

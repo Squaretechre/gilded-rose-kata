@@ -78,6 +78,8 @@ namespace GildedRose.Console
                 var itemQualityAboveZero = item.Quality > 0;
                 var itemQualityBelowMaxQuality = item.Quality < maxItemQuality;
 
+                item.SellIn = item.SellIn - 1;
+
                 if (itemQualityAboveZero && currenItemIsNormalItem)
                 {
                     item.Quality = item.Quality - 1;
@@ -98,7 +100,6 @@ namespace GildedRose.Console
                     item.Quality = item.Quality + 1;
                 }
 
-                item.SellIn = item.SellIn - 1;
                 itemQualityAboveZero = item.Quality > 0;
 
                 if (item.SellIn < 0 && itemQualityAboveZero && currenItemIsNormalItem)
@@ -114,6 +115,16 @@ namespace GildedRose.Console
                 if (item.SellIn < 0 && itemQualityBelowMaxQuality && itemIsAgedBrie)
                 {
                     item.Quality = item.Quality + 1;
+                }
+
+                if (item.Quality > maxItemQuality)
+                {
+                    item.Quality = maxItemQuality;
+                }
+
+                if (itemIsBackstagePasses && !itemQualityBelowMaxQuality)
+                {
+                    item.Quality = 0;
                 }
             }
         }
