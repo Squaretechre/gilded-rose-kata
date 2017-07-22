@@ -106,6 +106,11 @@ namespace GildedRose.Console
                     item.Quality = item.Quality + 1;
                 }
 
+                if (itemIsBackstagePasses && itemIsOverMaxQuality)
+                {
+                    item.Quality = 0;
+                }
+
                 if (itemIsNotAgedBrie && itemIsBackstagePasses && item.SellIn < 0 && item.Quality > 0)
                 {
                     item.Quality = item.Quality - item.Quality;
@@ -114,11 +119,6 @@ namespace GildedRose.Console
                 if (itemIsAgedBrie && item.SellIn < 0 && itemQualityBelowMaxQuality)
                 {
                     item.Quality = item.Quality + 1;
-                }
-
-                if (itemIsBackstagePasses && itemIsOverMaxQuality)
-                {
-                    item.Quality = 0;
                 }
 
                 if (item.Quality > maxItemQuality)
