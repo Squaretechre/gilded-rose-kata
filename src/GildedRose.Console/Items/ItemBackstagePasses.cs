@@ -1,6 +1,6 @@
-namespace GildedRose.Console
+namespace GildedRose.Console.Items
 {
-    public class BackstagePassesItem : BaseItem
+    public class ItemBackstagePasses : BaseItem
     {
         public override void UpdateQuality()
         {

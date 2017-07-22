@@ -1,6 +1,6 @@
-namespace GildedRose.Console
+namespace GildedRose.Console.Items
 {
-    public class AgedBrieItem : BaseItem
+    public class ItemAgedBrie : BaseItem
     {
         public override void UpdateQuality()
         {

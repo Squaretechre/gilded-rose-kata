@@ -1,22 +1,23 @@
-namespace GildedRose.Console
+namespace GildedRose.Console.Items
 {
     public abstract class BaseItem : Item
     {
-        private int _quality;
+        protected int ItemQuality;
         protected const int MaxItemQuality = 50;
-        private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
 
         public new int Quality
         {
-            get
+            get => CheckQuality();
+            set => ItemQuality = value;
+        }
+
+        public virtual int CheckQuality()
+        {
+            if (ItemQuality > MaxItemQuality)
             {
-                if (_quality > MaxItemQuality && Name != SulfurasHandOfRagnaros)
-                {
-                    _quality = MaxItemQuality;
-                }
-                return _quality;
+                ItemQuality = MaxItemQuality;
             }
-            set => _quality = value;
+            return ItemQuality;
         }
 
         public abstract void UpdateQuality();

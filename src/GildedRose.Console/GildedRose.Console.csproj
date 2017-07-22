@@ -41,14 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AgedBrieItem.cs" />
-    <Compile Include="BackstagePassesItem.cs" />
-    <Compile Include="BaseItem.cs" />
-    <Compile Include="NormalItem.cs" />
+    <Compile Include="Items\ItemAgedBrie.cs" />
+    <Compile Include="Items\ItemBackstagePasses.cs" />
+    <Compile Include="Items\BaseItem.cs" />
+    <Compile Include="Items\ItemNormal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShopItem.cs" />
-    <Compile Include="SulfurasItem.cs" />
+    <Compile Include="Items\ItemSulfuras.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
