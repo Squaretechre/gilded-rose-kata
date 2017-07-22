@@ -3,7 +3,7 @@ using Xunit;
 
 namespace GildedRose.Tests
 {
-    public class OrdinaryItemShould
+    public class NormalItemShould
     {
         /*
             - All items have a SellIn value which denotes the number of times we have to sell the item
@@ -104,7 +104,7 @@ namespace GildedRose.Tests
         }
 
         [Fact]
-        public void not_have_quality_above_maximum_quality_of_50()
+        public void never_have_quality_above_maximum_quality_of_50()
         {
             const int maximumItemQuality = 50;
             const int timesToUpdateQualityBy = maximumItemQuality + 1;
