@@ -73,6 +73,8 @@ namespace GildedRose.Console
 
                 var currentItemIsNotNormalItem = !currenItemIsNormalItem;
 
+                if (itemIsSulfuras) continue;
+
                 if (item.Quality > 0 && currenItemIsNormalItem)
                 {
                     item.Quality = item.Quality - 1;
@@ -93,10 +95,7 @@ namespace GildedRose.Console
                     item.Quality = item.Quality + 1;
                 }
 
-                if (itemIsNotSulfuras)
-                {
-                    item.SellIn = item.SellIn - 1;
-                }
+                item.SellIn = item.SellIn - 1;
 
                 if (item.SellIn < 0 && itemIsNotAgedBrie && item.Quality > 0 && itemIsNotBackstagePasses && itemIsNotSulfuras)
                 {
