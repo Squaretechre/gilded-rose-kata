@@ -18,25 +18,23 @@ namespace GildedRose.Console
                                          itemIsNotAgedBrie &&
                                          itemIsNotBackstagePasses;
 
-            var currentItemIsNotNormalItem = !currenItemIsNormalItem;
-
             if (itemIsSulfuras) return;
 
             SellIn = SellIn - 1;
 
             UpdateNormalItem(currenItemIsNormalItem);
 
-            if (currentItemIsNotNormalItem && itemIsNotBackstagePasses && QualityBelowMaxQuality())
+            if (itemIsAgedBrie && QualityBelowMaxQuality())
             {
                 Quality = Quality + 1;
             }
-
-            UpdateBackstagePasses(itemIsBackstagePasses);
 
             if (itemIsAgedBrie && SellIn < 0 && QualityBelowMaxQuality())
             {
                 Quality = Quality + 1;
             }
+
+            UpdateBackstagePasses(itemIsBackstagePasses);
 
             if (Quality > MaxItemQuality)
             {
