@@ -96,22 +96,22 @@ namespace GildedRose.Console
                     item.Quality = item.Quality + 1;
                 }
 
-                if (currentItemIsNotNormalItem && itemIsBackstagePasses && item.SellIn > 10 && itemQualityBelowMaxQuality)
+                if (itemIsBackstagePasses && item.SellIn > 10 && itemQualityBelowMaxQuality)
                 {
                     item.Quality = item.Quality + 1;
                 }
 
-                if (currentItemIsNotNormalItem && itemIsBackstagePasses && item.SellIn >= 6 && item.SellIn <= 10 && itemQualityBelowMaxQuality)
+                if (itemIsBackstagePasses && item.SellIn >= 6 && item.SellIn <= 10 && itemQualityBelowMaxQuality)
                 {
                     item.Quality = item.Quality + 2;
                 }
 
-                if (currentItemIsNotNormalItem && itemIsBackstagePasses && item.SellIn >= 0  && item.SellIn <= 5 && itemQualityBelowMaxQuality)
+                if (itemIsBackstagePasses && item.SellIn >= 0  && item.SellIn <= 5 && itemQualityBelowMaxQuality)
                 {
                     item.Quality = item.Quality + 3;
                 }
 
-                if (currentItemIsNotNormalItem && itemIsBackstagePasses && item.SellIn < 0 && item.Quality > 0)
+                if (itemIsBackstagePasses && item.SellIn < 0 && item.Quality > 0)
                 {
                     item.Quality = item.Quality - item.Quality;
                 }
