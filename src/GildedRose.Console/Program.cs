@@ -55,13 +55,11 @@ namespace GildedRose.Console
 
         public void UpdateQuality()
         {
-            for (var i = 0; i < Items.Count; i++)
+            foreach (var currentItem in Items)
             {
-                var currentItem = Items[i];
-
                 var currenItemIsNormalItem = currentItem.Name != "Sulfuras, Hand of Ragnaros" &&
-                                                  currentItem.Name != "Aged Brie" &&
-                                                  currentItem.Name != "Backstage passes to a TAFKAL80ETC concert";
+                                             currentItem.Name != "Aged Brie" &&
+                                             currentItem.Name != "Backstage passes to a TAFKAL80ETC concert";
 
                 if (currentItem.Quality > 0 && currenItemIsNormalItem)
                 {
