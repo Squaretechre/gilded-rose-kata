@@ -24,42 +24,16 @@ namespace GildedRose.Console
 
             SellIn = SellIn - 1;
 
-            if (currenItemIsNormalItem && ItemQualityAboveZero())
-            {
-                Quality = Quality - 1;
-            }
+            UpdateNormalItem(currenItemIsNormalItem);
 
-            if (currenItemIsNormalItem && SellIn < 0 && ItemQualityAboveZero())
-            {
-                Quality = Quality - 1;
-            }
-
-            if (currentItemIsNotNormalItem && itemIsNotBackstagePasses && ItemQualityBelowMaxQuality())
+            if (currentItemIsNotNormalItem && itemIsNotBackstagePasses && QualityBelowMaxQuality())
             {
                 Quality = Quality + 1;
             }
 
-            if (itemIsBackstagePasses && SellIn > 10 && ItemQualityBelowMaxQuality())
-            {
-                Quality = Quality + 1;
-            }
+            UpdateBackstagePasses(itemIsBackstagePasses);
 
-            if (itemIsBackstagePasses && SellIn >= 6 && SellIn <= 10 && ItemQualityBelowMaxQuality())
-            {
-                Quality = Quality + 2;
-            }
-
-            if (itemIsBackstagePasses && SellIn >= 0 && SellIn <= 5 && ItemQualityBelowMaxQuality())
-            {
-                Quality = Quality + 3;
-            }
-
-            if (itemIsBackstagePasses && SellIn < 0 && ItemQualityAboveZero())
-            {
-                Quality = Quality - Quality;
-            }
-
-            if (itemIsAgedBrie && SellIn < 0 && ItemQualityBelowMaxQuality())
+            if (itemIsAgedBrie && SellIn < 0 && QualityBelowMaxQuality())
             {
                 Quality = Quality + 1;
             }
@@ -70,12 +44,48 @@ namespace GildedRose.Console
             }
         }
 
-        private bool ItemQualityBelowMaxQuality()
+        private void UpdateNormalItem(bool currenItemIsNormalItem)
+        {
+            if (currenItemIsNormalItem && QualityAboveZero())
+            {
+                Quality = Quality - 1;
+            }
+
+            if (currenItemIsNormalItem && SellIn < 0 && QualityAboveZero())
+            {
+                Quality = Quality - 1;
+            }
+        }
+
+        private void UpdateBackstagePasses(bool itemIsBackstagePasses)
+        {
+            if (itemIsBackstagePasses && SellIn > 10 && QualityBelowMaxQuality())
+            {
+                Quality = Quality + 1;
+            }
+
+            if (itemIsBackstagePasses && SellIn >= 6 && SellIn <= 10 && QualityBelowMaxQuality())
+            {
+                Quality = Quality + 2;
+            }
+
+            if (itemIsBackstagePasses && SellIn >= 0 && SellIn <= 5 && QualityBelowMaxQuality())
+            {
+                Quality = Quality + 3;
+            }
+
+            if (itemIsBackstagePasses && SellIn < 0 && QualityAboveZero())
+            {
+                Quality = Quality - Quality;
+            }
+        }
+
+        private bool QualityBelowMaxQuality()
         {
             return Quality < MaxItemQuality;
         }
 
-        private bool ItemQualityAboveZero()
+        private bool QualityAboveZero()
         {
             return Quality > 0;
         }
