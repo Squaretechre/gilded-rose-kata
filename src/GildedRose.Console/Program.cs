@@ -59,11 +59,11 @@ namespace GildedRose.Console
             {
                 var currentItem = Items[i];
 
-                var currentItemIsNotSpecialItem = currentItem.Name != "Sulfuras, Hand of Ragnaros" &&
+                var currenItemIsNormalItem = currentItem.Name != "Sulfuras, Hand of Ragnaros" &&
                                                   currentItem.Name != "Aged Brie" &&
                                                   currentItem.Name != "Backstage passes to a TAFKAL80ETC concert";
 
-                if (currentItem.Quality > 0 && currentItemIsNotSpecialItem)
+                if (currentItem.Quality > 0 && currenItemIsNormalItem)
                 {
                     currentItem.Quality = currentItem.Quality - 1;
                 }
