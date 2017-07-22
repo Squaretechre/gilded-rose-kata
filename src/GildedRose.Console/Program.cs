@@ -80,7 +80,7 @@ namespace GildedRose.Console
 
                 item.SellIn = item.SellIn - 1;
 
-                if (itemQualityAboveZero && currenItemIsNormalItem)
+                if (currenItemIsNormalItem && itemQualityAboveZero)
                 {
                     item.Quality = item.Quality - 1;
                 }
@@ -100,7 +100,7 @@ namespace GildedRose.Console
                     item.Quality = item.Quality + 1;
                 }
 
-                if (item.SellIn < 0 && item.Quality > 0 && currenItemIsNormalItem)
+                if (currenItemIsNormalItem && item.SellIn < 0 && item.Quality > 0)
                 {
                     item.Quality = item.Quality - 1;
                 }
