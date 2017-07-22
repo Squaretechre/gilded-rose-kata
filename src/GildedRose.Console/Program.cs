@@ -101,7 +101,7 @@ namespace GildedRose.Console
                 item.SellIn = item.SellIn - 1;
                 itemQualityAboveZero = item.Quality > 0;
 
-                if (item.SellIn < 0 && itemQualityAboveZero && itemIsNotAgedBrie && itemIsNotBackstagePasses && itemIsNotSulfuras)
+                if (item.SellIn < 0 && itemQualityAboveZero && currenItemIsNormalItem)
                 {
                     item.Quality = item.Quality - 1;
                 }
