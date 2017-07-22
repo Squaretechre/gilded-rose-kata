@@ -61,6 +61,8 @@ namespace GildedRose.Console
                                              item.Name != "Aged Brie" &&
                                              item.Name != "Backstage passes to a TAFKAL80ETC concert";
 
+                var itemIsBackstagePasses = item.Name == "Backstage passes to a TAFKAL80ETC concert";
+
                 var currentItemIsNotNormalItem = !currenItemIsNormalItem;
 
                 if (item.Quality > 0 && currenItemIsNormalItem)
@@ -73,12 +75,12 @@ namespace GildedRose.Console
                     item.Quality = item.Quality + 1;
                 }
 
-                if (currentItemIsNotNormalItem && item.Name == "Backstage passes to a TAFKAL80ETC concert" && item.SellIn < 11 && item.Quality < 50)
+                if (currentItemIsNotNormalItem && itemIsBackstagePasses && item.SellIn < 11 && item.Quality < 50)
                 {
                     item.Quality = item.Quality + 1;
                 }
 
-                if (currentItemIsNotNormalItem && item.Name == "Backstage passes to a TAFKAL80ETC concert" && item.SellIn < 6 && item.Quality < 50)
+                if (currentItemIsNotNormalItem && itemIsBackstagePasses && item.SellIn < 6 && item.Quality < 50)
                 {
                     item.Quality = item.Quality + 1;
                 }
