@@ -38,8 +38,8 @@ namespace GildedRose.Tests
         {
             var program = new ProgramBuilder().WithUpdatedQuality(10).Build();
             var dexterityVest = program.Item(ShopItem.DexterityVest);
-            var expectedQuality = 10;
-            var expectedSellIn = 0;
+            const int expectedQuality = 10;
+            const int expectedSellIn = 0;
             Assert.Equal(expectedQuality, dexterityVest.Quality);
             Assert.Equal(expectedSellIn, dexterityVest.SellIn);
         }
@@ -84,6 +84,21 @@ namespace GildedRose.Tests
             Assert.Equal(expectedSulfurasSellIn, sulfuras.SellIn);
             Assert.Equal(expectedBackstagePassesSellIn, backstagePasses.SellIn);
             Assert.Equal(expectedConjuredManaCakeSellIn, conjuredManaCake.SellIn);
+        }
+
+        [Theory]
+        [InlineData(11, 8, -1)]
+        [InlineData(12, 6, -2)]
+        [InlineData(13, 4, -3)]
+        [InlineData(14, 2, -4)]
+        [InlineData(15, 0, -5)]
+        [InlineData(16, 0, -6)]
+        public void decrease_ordinary_item_quality_by_2_when_sell_in_below_zero(int timesToUpdateQualityBy, int expectedQuality, int expectedSellIn)
+        {
+            var program = new ProgramBuilder().WithUpdatedQuality(timesToUpdateQualityBy).Build();
+            var dexterityVest = program.Item(ShopItem.DexterityVest);
+            Assert.Equal(expectedQuality, dexterityVest.Quality);
+            Assert.Equal(expectedSellIn, dexterityVest.SellIn);
         }
 
         [Fact]
