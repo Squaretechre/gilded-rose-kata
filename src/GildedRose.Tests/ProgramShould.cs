@@ -34,6 +34,17 @@ namespace GildedRose.Tests
         */
 
         [Fact]
+        public void decrease_ordinary_item_quality_by_1_when_sell_in_date_is_greater_than_or_equal_to_zero()
+        {
+            var program = new ProgramBuilder().WithUpdatedQuality(10).Build();
+            var dexterityVest = program.Item(ShopItem.DexterityVest);
+            var expectedQuality = 10;
+            var expectedSellIn = 0;
+            Assert.Equal(expectedQuality, dexterityVest.Quality);
+            Assert.Equal(expectedSellIn, dexterityVest.SellIn);
+        }
+
+        [Fact]
         public void decrease_ordinary_item_quality_by_1_when_quality_is_updated()
         {
             var program = new ProgramBuilder().WithUpdatedQuality(1).Build();
