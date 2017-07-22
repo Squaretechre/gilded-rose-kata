@@ -13,6 +13,7 @@ namespace GildedRose.Console
     public class Program
     {
         IList<Item> Items;
+        IList<BaseItem> OtherItems;
 
         static void Main(string[] args)
         {
@@ -38,98 +39,34 @@ namespace GildedRose.Console
                     new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80},
                     new Item {Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20},
                     new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
+                },
+                OtherItems = new List<BaseItem>
+                {
+                    new BaseItem {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
+                    new BaseItem {Name = "Aged Brie", SellIn = 2, Quality = 0},
+                    new BaseItem {Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7},
+                    new BaseItem {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80},
+                    new BaseItem {Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20},
+                    new BaseItem {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
                 }
-
             };
         }
 
-        public Item Item(ShopItem item) => new Dictionary<ShopItem, Item>()
+        public BaseItem Item(ShopItem item) => new Dictionary<ShopItem, BaseItem>()
         {
-            { ShopItem.DexterityVest, Items[0] },
-            { ShopItem.AgedBrie, Items[1] },
-            { ShopItem.ElixirOfTheMongoose, Items[2] },
-            { ShopItem.Sulfuras, Items[3] },
-            { ShopItem.BackstagePasses, Items[4] },
-            { ShopItem.ConjuredManaCake, Items[5] }
+            { ShopItem.DexterityVest, OtherItems[0] },
+            { ShopItem.AgedBrie, OtherItems[1] },
+            { ShopItem.ElixirOfTheMongoose, OtherItems[2] },
+            { ShopItem.Sulfuras, OtherItems[3] },
+            { ShopItem.BackstagePasses, OtherItems[4] },
+            { ShopItem.ConjuredManaCake, OtherItems[5] }
         }[item];
 
         public void UpdateQuality()
         {
-            foreach (var item in Items)
+            foreach (var item in OtherItems)
             {
-                const int maxItemQuality = 50;
-
-                var itemIsNotAgedBrie = item.Name != "Aged Brie";
-                var itemIsNotSulfuras = item.Name != "Sulfuras, Hand of Ragnaros";
-                var itemIsNotBackstagePasses = item.Name != "Backstage passes to a TAFKAL80ETC concert";
-
-                var itemIsBackstagePasses = item.Name == "Backstage passes to a TAFKAL80ETC concert";
-                var itemIsSulfuras = item.Name == "Sulfuras, Hand of Ragnaros";
-                var itemIsAgedBrie = item.Name == "Aged Brie";
-
-                var currenItemIsNormalItem = itemIsNotSulfuras &&
-                                             itemIsNotAgedBrie &&
-                                             itemIsNotBackstagePasses;
-
-                var currentItemIsNotNormalItem = !currenItemIsNormalItem;
-
-                if (itemIsSulfuras) continue;
-
-                var itemQualityAboveZero = item.Quality > 0;
-                var itemQualityBelowMaxQuality = item.Quality < maxItemQuality;
-                var itemIsOverMaxQuality = !itemQualityBelowMaxQuality;
-
-                item.SellIn = item.SellIn - 1;
-
-                if (currenItemIsNormalItem && itemQualityAboveZero)
-                {
-                    item.Quality = item.Quality - 1;
-                }
-
-                if (currenItemIsNormalItem && item.SellIn < 0 && item.Quality > 0)
-                {
-                    item.Quality = item.Quality - 1;
-                }
-
-                if (currentItemIsNotNormalItem && itemIsNotBackstagePasses && itemQualityBelowMaxQuality)
-                {
-                    item.Quality = item.Quality + 1;
-                }
-
-                if (itemIsBackstagePasses && item.SellIn > 10 && itemQualityBelowMaxQuality)
-                {
-                    item.Quality = item.Quality + 1;
-                }
-
-                if (itemIsBackstagePasses && item.SellIn >= 6 && item.SellIn <= 10 && itemQualityBelowMaxQuality)
-                {
-                    item.Quality = item.Quality + 2;
-                }
-
-                if (itemIsBackstagePasses && item.SellIn >= 0  && item.SellIn <= 5 && itemQualityBelowMaxQuality)
-                {
-                    item.Quality = item.Quality + 3;
-                }
-
-                if (itemIsBackstagePasses && item.SellIn < 0 && item.Quality > 0)
-                {
-                    item.Quality = item.Quality - item.Quality;
-                }
-
-                if (itemIsBackstagePasses && itemIsOverMaxQuality)
-                {
-                    item.Quality = 0;
-                }
-
-                if (itemIsAgedBrie && item.SellIn < 0 && itemQualityBelowMaxQuality)
-                {
-                    item.Quality = item.Quality + 1;
-                }
-
-                if (item.Quality > maxItemQuality)
-                {
-                    item.Quality = maxItemQuality;
-                }
+                item.UpdateQuality();
             }
         }
     }
@@ -143,4 +80,83 @@ namespace GildedRose.Console
         public int Quality { get; set; }
     }
 
+    public class BaseItem : Item
+    {
+        public void UpdateQuality()
+        {
+            const int maxItemQuality = 50;
+
+            var itemIsNotAgedBrie = Name != "Aged Brie";
+            var itemIsNotSulfuras = Name != "Sulfuras, Hand of Ragnaros";
+            var itemIsNotBackstagePasses = Name != "Backstage passes to a TAFKAL80ETC concert";
+
+            var itemIsBackstagePasses = Name == "Backstage passes to a TAFKAL80ETC concert";
+            var itemIsSulfuras = Name == "Sulfuras, Hand of Ragnaros";
+            var itemIsAgedBrie = Name == "Aged Brie";
+
+            var currenItemIsNormalItem = itemIsNotSulfuras &&
+                                         itemIsNotAgedBrie &&
+                                         itemIsNotBackstagePasses;
+
+            var currentItemIsNotNormalItem = !currenItemIsNormalItem;
+
+            if (itemIsSulfuras) return;
+
+            var itemQualityAboveZero = Quality > 0;
+            var itemQualityBelowMaxQuality = Quality < maxItemQuality;
+            var itemIsOverMaxQuality = !itemQualityBelowMaxQuality;
+
+            SellIn = SellIn - 1;
+
+            if (currenItemIsNormalItem && itemQualityAboveZero)
+            {
+                Quality = Quality - 1;
+            }
+
+            if (currenItemIsNormalItem && SellIn < 0 && Quality > 0)
+            {
+                Quality = Quality - 1;
+            }
+
+            if (currentItemIsNotNormalItem && itemIsNotBackstagePasses && itemQualityBelowMaxQuality)
+            {
+                Quality = Quality + 1;
+            }
+
+            if (itemIsBackstagePasses && SellIn > 10 && itemQualityBelowMaxQuality)
+            {
+                Quality = Quality + 1;
+            }
+
+            if (itemIsBackstagePasses && SellIn >= 6 && SellIn <= 10 && itemQualityBelowMaxQuality)
+            {
+                Quality = Quality + 2;
+            }
+
+            if (itemIsBackstagePasses && SellIn >= 0 && SellIn <= 5 && itemQualityBelowMaxQuality)
+            {
+                Quality = Quality + 3;
+            }
+
+            if (itemIsBackstagePasses && SellIn < 0 && Quality > 0)
+            {
+                Quality = Quality - Quality;
+            }
+
+            if (itemIsBackstagePasses && itemIsOverMaxQuality)
+            {
+                Quality = 0;
+            }
+
+            if (itemIsAgedBrie && SellIn < 0 && itemQualityBelowMaxQuality)
+            {
+                Quality = Quality + 1;
+            }
+
+            if (Quality > maxItemQuality)
+            {
+                Quality = maxItemQuality;
+            }
+        }
+    }
 }
