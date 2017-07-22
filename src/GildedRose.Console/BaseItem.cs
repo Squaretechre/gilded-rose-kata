@@ -22,13 +22,9 @@ namespace GildedRose.Console
 
             if (itemIsSulfuras) return;
 
-            var itemQualityAboveZero = ItemQualityAboveZero();
-            var itemQualityBelowMaxQuality = ItemQualityBelowMaxQuality();
-            var itemIsOverMaxQuality = ItemIsOverMaxQuality();
-
             SellIn = SellIn - 1;
 
-            if (currenItemIsNormalItem && itemQualityAboveZero)
+            if (currenItemIsNormalItem && ItemQualityAboveZero())
             {
                 Quality = Quality - 1;
             }
@@ -38,22 +34,22 @@ namespace GildedRose.Console
                 Quality = Quality - 1;
             }
 
-            if (currentItemIsNotNormalItem && itemIsNotBackstagePasses && itemQualityBelowMaxQuality)
+            if (currentItemIsNotNormalItem && itemIsNotBackstagePasses && ItemQualityBelowMaxQuality())
             {
                 Quality = Quality + 1;
             }
 
-            if (itemIsBackstagePasses && SellIn > 10 && itemQualityBelowMaxQuality)
+            if (itemIsBackstagePasses && SellIn > 10 && ItemQualityBelowMaxQuality())
             {
                 Quality = Quality + 1;
             }
 
-            if (itemIsBackstagePasses && SellIn >= 6 && SellIn <= 10 && itemQualityBelowMaxQuality)
+            if (itemIsBackstagePasses && SellIn >= 6 && SellIn <= 10 && ItemQualityBelowMaxQuality())
             {
                 Quality = Quality + 2;
             }
 
-            if (itemIsBackstagePasses && SellIn >= 0 && SellIn <= 5 && itemQualityBelowMaxQuality)
+            if (itemIsBackstagePasses && SellIn >= 0 && SellIn <= 5 && ItemQualityBelowMaxQuality())
             {
                 Quality = Quality + 3;
             }
@@ -63,12 +59,7 @@ namespace GildedRose.Console
                 Quality = Quality - Quality;
             }
 
-            if (itemIsBackstagePasses && itemIsOverMaxQuality)
-            {
-                Quality = 0;
-            }
-
-            if (itemIsAgedBrie && SellIn < 0 && itemQualityBelowMaxQuality)
+            if (itemIsAgedBrie && SellIn < 0 && ItemQualityBelowMaxQuality())
             {
                 Quality = Quality + 1;
             }
@@ -77,11 +68,6 @@ namespace GildedRose.Console
             {
                 Quality = MaxItemQuality;
             }
-        }
-
-        private bool ItemIsOverMaxQuality()
-        {
-            return !ItemQualityBelowMaxQuality();
         }
 
         private bool ItemQualityBelowMaxQuality()
