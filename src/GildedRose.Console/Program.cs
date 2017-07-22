@@ -63,13 +63,13 @@ namespace GildedRose.Console
                 var itemIsNotSulfuras = item.Name != "Sulfuras, Hand of Ragnaros";
                 var itemIsNotBackstagePasses = item.Name != "Backstage passes to a TAFKAL80ETC concert";
 
-                var currenItemIsNormalItem = itemIsNotSulfuras &&
-                                             itemIsNotAgedBrie &&
-                                             itemIsNotBackstagePasses;
-
                 var itemIsBackstagePasses = item.Name == "Backstage passes to a TAFKAL80ETC concert";
                 var itemIsSulfuras = item.Name == "Sulfuras, Hand of Ragnaros";
                 var itemIsAgedBrie = item.Name == "Aged Brie";
+
+                var currenItemIsNormalItem = itemIsNotSulfuras &&
+                                             itemIsNotAgedBrie &&
+                                             itemIsNotBackstagePasses;
 
                 var currentItemIsNotNormalItem = !currenItemIsNormalItem;
 
@@ -91,19 +91,24 @@ namespace GildedRose.Console
                     item.Quality = item.Quality - 1;
                 }
 
-                if (currentItemIsNotNormalItem && itemQualityBelowMaxQuality)
+                if (currentItemIsNotNormalItem && itemIsNotBackstagePasses && itemQualityBelowMaxQuality)
                 {
                     item.Quality = item.Quality + 1;
                 }
 
-                if (currentItemIsNotNormalItem && itemIsBackstagePasses && item.SellIn < 11 && itemQualityBelowMaxQuality)
+                if (currentItemIsNotNormalItem && itemIsBackstagePasses && item.SellIn > 10 && itemQualityBelowMaxQuality)
                 {
                     item.Quality = item.Quality + 1;
                 }
 
-                if (currentItemIsNotNormalItem && itemIsBackstagePasses && item.SellIn < 6 && itemQualityBelowMaxQuality)
+                if (currentItemIsNotNormalItem && itemIsBackstagePasses && item.SellIn >= 6 && item.SellIn <= 10 && itemQualityBelowMaxQuality)
                 {
-                    item.Quality = item.Quality + 1;
+                    item.Quality = item.Quality + 2;
+                }
+
+                if (currentItemIsNotNormalItem && itemIsBackstagePasses && item.SellIn >= 0  && item.SellIn <= 5 && itemQualityBelowMaxQuality)
+                {
+                    item.Quality = item.Quality + 3;
                 }
 
                 if (currentItemIsNotNormalItem && itemIsBackstagePasses && item.SellIn < 0 && item.Quality > 0)
