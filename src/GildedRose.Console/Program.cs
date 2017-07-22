@@ -55,56 +55,56 @@ namespace GildedRose.Console
 
         public void UpdateQuality()
         {
-            foreach (var currentItem in Items)
+            foreach (var item in Items)
             {
-                var currenItemIsNormalItem = currentItem.Name != "Sulfuras, Hand of Ragnaros" &&
-                                             currentItem.Name != "Aged Brie" &&
-                                             currentItem.Name != "Backstage passes to a TAFKAL80ETC concert";
+                var currenItemIsNormalItem = item.Name != "Sulfuras, Hand of Ragnaros" &&
+                                             item.Name != "Aged Brie" &&
+                                             item.Name != "Backstage passes to a TAFKAL80ETC concert";
 
-                if (currentItem.Quality > 0 && currenItemIsNormalItem)
+                var currentItemIsNotNormalItem = !currenItemIsNormalItem;
+
+                if (item.Quality > 0 && currenItemIsNormalItem)
                 {
-                    currentItem.Quality = currentItem.Quality - 1;
-                }
-                else
-                {
-                    if (currentItem.Quality < 50)
-                    {
-                        currentItem.Quality = currentItem.Quality + 1;
-                    }
-
-                    if (currentItem.Name == "Backstage passes to a TAFKAL80ETC concert" && currentItem.SellIn < 11 && currentItem.Quality < 50)
-                    {
-                        currentItem.Quality = currentItem.Quality + 1;
-                    }
-
-                    if (currentItem.Name == "Backstage passes to a TAFKAL80ETC concert" && currentItem.SellIn < 6 && currentItem.Quality < 50)
-                    {
-                        currentItem.Quality = currentItem.Quality + 1;
-                    }
+                    item.Quality = item.Quality - 1;
                 }
 
-                if (currentItem.Name != "Sulfuras, Hand of Ragnaros")
+                if (currentItemIsNotNormalItem && item.Quality < 50)
                 {
-                    currentItem.SellIn = currentItem.SellIn - 1;
+                    item.Quality = item.Quality + 1;
                 }
 
-                if (currentItem.SellIn >= 0) continue;
-
-                if (currentItem.Name != "Aged Brie")
+                if (currentItemIsNotNormalItem && item.Name == "Backstage passes to a TAFKAL80ETC concert" && item.SellIn < 11 && item.Quality < 50)
                 {
-                    if (currentItem.Name != "Backstage passes to a TAFKAL80ETC concert" && currentItem.Quality > 0 && currentItem.Name != "Sulfuras, Hand of Ragnaros")
+                    item.Quality = item.Quality + 1;
+                }
+
+                if (currentItemIsNotNormalItem && item.Name == "Backstage passes to a TAFKAL80ETC concert" && item.SellIn < 6 && item.Quality < 50)
+                {
+                    item.Quality = item.Quality + 1;
+                }
+
+                if (item.Name != "Sulfuras, Hand of Ragnaros")
+                {
+                    item.SellIn = item.SellIn - 1;
+                }
+
+                if (item.SellIn >= 0) continue;
+
+                if (item.Name != "Aged Brie")
+                {
+                    if (item.Name != "Backstage passes to a TAFKAL80ETC concert" && item.Quality > 0 && item.Name != "Sulfuras, Hand of Ragnaros")
                     {
-                        currentItem.Quality = currentItem.Quality - 1;
+                        item.Quality = item.Quality - 1;
                     }
                     else
                     {
-                        currentItem.Quality = currentItem.Quality - currentItem.Quality;
+                        item.Quality = item.Quality - item.Quality;
                     }
                 }
 
-                if (currentItem.Name == "Aged Brie" && currentItem.Quality < 50)
+                if (item.Name == "Aged Brie" && item.Quality < 50)
                 {
-                    currentItem.Quality = currentItem.Quality + 1;
+                    item.Quality = item.Quality + 1;
                 }
             }
         }
