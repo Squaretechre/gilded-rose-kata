@@ -57,8 +57,9 @@ namespace GildedRose.Console
         {
             foreach (var item in Items)
             {
+                var itemIsNotAgedBrie = item.Name != "Aged Brie";
                 var currenItemIsNormalItem = item.Name != "Sulfuras, Hand of Ragnaros" &&
-                                             item.Name != "Aged Brie" &&
+                                             itemIsNotAgedBrie &&
                                              item.Name != "Backstage passes to a TAFKAL80ETC concert";
 
                 var itemIsBackstagePasses = item.Name == "Backstage passes to a TAFKAL80ETC concert";
@@ -92,12 +93,12 @@ namespace GildedRose.Console
 
                 if (item.SellIn >= 0) continue;
 
-                if (item.Name != "Aged Brie" && item.Quality > 0 && item.Name != "Backstage passes to a TAFKAL80ETC concert" && item.Name != "Sulfuras, Hand of Ragnaros")
+                if (itemIsNotAgedBrie && item.Quality > 0 && item.Name != "Backstage passes to a TAFKAL80ETC concert" && item.Name != "Sulfuras, Hand of Ragnaros")
                 {
                     item.Quality = item.Quality - 1;
                 }
 
-                if (item.Name != "Aged Brie" && item.Quality > 0 && item.Name == "Backstage passes to a TAFKAL80ETC concert" || item.Name == "Sulfuras, Hand of Ragnaros")
+                if (itemIsNotAgedBrie && item.Quality > 0 && item.Name == "Backstage passes to a TAFKAL80ETC concert" || item.Name == "Sulfuras, Hand of Ragnaros")
                 {
                     item.Quality = item.Quality - item.Quality;
                 }
