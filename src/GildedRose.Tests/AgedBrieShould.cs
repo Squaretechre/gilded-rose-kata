@@ -16,8 +16,8 @@ namespace GildedRose.Tests
 
             var agedBrie = program.Item(ShopItem.AgedBrie);
 
-            Assert.Equal(agedBrie.Quality, expectedQuality);
-            Assert.Equal(agedBrie.SellIn, expectedSellIn);
+            Assert.Equal(expectedQuality, agedBrie.Quality);
+            Assert.Equal(expectedSellIn, agedBrie.SellIn);
         }
 
         [Theory]
@@ -32,8 +32,8 @@ namespace GildedRose.Tests
 
             var agedBrie = program.Item(ShopItem.AgedBrie);
 
-            Assert.Equal(agedBrie.Quality, expectedQuality);
-            Assert.Equal(agedBrie.SellIn, expectedSellIn);
+            Assert.Equal(expectedQuality, agedBrie.Quality);
+            Assert.Equal(expectedSellIn, agedBrie.SellIn);
         }
 
         [Theory]
@@ -46,8 +46,8 @@ namespace GildedRose.Tests
 
             var agedBrie = program.Item(ShopItem.AgedBrie);
 
-            Assert.Equal(agedBrie.Quality, expectedQuality);
-            Assert.Equal(agedBrie.SellIn, expectedSellIn);
+            Assert.Equal(expectedQuality, agedBrie.Quality);
+            Assert.Equal(expectedSellIn, agedBrie.SellIn);
         }
     }
 }

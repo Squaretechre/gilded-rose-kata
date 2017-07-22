@@ -112,7 +112,7 @@ namespace GildedRose.Tests
 
             var agedBrie = program.Item(ShopItem.AgedBrie);
 
-            Assert.Equal(agedBrie.Quality, 50);
+            Assert.Equal(50, agedBrie.Quality);
         }
     }
 }

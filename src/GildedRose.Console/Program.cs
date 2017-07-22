@@ -43,7 +43,7 @@ namespace GildedRose.Console
                 OtherItems = new List<BaseItem>
                 {
                     new NormalItem {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
-                    new BaseItem {Name = "Aged Brie", SellIn = 2, Quality = 0},
+                    new AgedBrie {Name = "Aged Brie", SellIn = 2, Quality = 0},
                     new NormalItem {Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7},
                     new BaseItem {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80},
                     new BaseItem {Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20},
@@ -54,12 +54,12 @@ namespace GildedRose.Console
 
         public BaseItem Item(ShopItem shopItem) => new Dictionary<ShopItem, BaseItem>()
         {
-            { Console.ShopItem.DexterityVest, OtherItems[0] },
-            { Console.ShopItem.AgedBrie, OtherItems[1] },
-            { Console.ShopItem.ElixirOfTheMongoose, OtherItems[2] },
-            { Console.ShopItem.Sulfuras, OtherItems[3] },
-            { Console.ShopItem.BackstagePasses, OtherItems[4] },
-            { Console.ShopItem.ConjuredManaCake, OtherItems[5] }
+            { ShopItem.DexterityVest, OtherItems[0] },
+            { ShopItem.AgedBrie, OtherItems[1] },
+            { ShopItem.ElixirOfTheMongoose, OtherItems[2] },
+            { ShopItem.Sulfuras, OtherItems[3] },
+            { ShopItem.BackstagePasses, OtherItems[4] },
+            { ShopItem.ConjuredManaCake, OtherItems[5] }
         }[shopItem];
 
         public void UpdateQuality()
