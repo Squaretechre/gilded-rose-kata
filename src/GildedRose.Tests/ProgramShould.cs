@@ -13,7 +13,7 @@ namespace GildedRose.Tests
             ✓ "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
             ✓ The Quality of an item is never negative
             ✓ The Quality of an item is never more than 50
-            - "Aged Brie" actually increases in Quality the older it gets
+            ✓ "Aged Brie" actually increases in Quality the older it gets
             - Once the sell by date has passed, Quality degrades twice as fast
             
             - "Backstage passes", like aged brie, increases in Quality as it's SellIn value approaches; 
@@ -36,8 +36,7 @@ namespace GildedRose.Tests
         [Fact]
         public void decrease_ordinary_item_quality_by_1_when_quality_is_updated()
         {
-            var program = Program.CreateProgram();
-            program.UpdateQuality();
+            var program = new ProgramBuilder().WithUpdatedQuality(1).Build();
 
             var dexterityVest = program.Item(ShopItem.DexterityVest);
             var elixirOfTheMongoose = program.Item(ShopItem.ElixirOfTheMongoose);
@@ -52,8 +51,7 @@ namespace GildedRose.Tests
         [Fact]
         public void decrease_items_sell_in_date_by_1_when_quality_is_updated()
         {
-            var program = Program.CreateProgram();
-            program.UpdateQuality();
+            var program = new ProgramBuilder().WithUpdatedQuality(1).Build();
 
             var dexterityVest = program.Item(ShopItem.DexterityVest);
             var agedBrie = program.Item(ShopItem.AgedBrie);
@@ -80,13 +78,7 @@ namespace GildedRose.Tests
         [Fact]
         public void never_reduce_an_items_quality_so_that_it_is_negative()
         {
-            var program = Program.CreateProgram();
-
-            const int numberOftimesToUpdateQualityBy = 80;
-            for (var i = 0; i < numberOftimesToUpdateQualityBy; i++)
-            {
-               program.UpdateQuality(); 
-            }
+            var program = new ProgramBuilder().WithUpdatedQuality(80).Build();
 
             var dexterityVest = program.Item(ShopItem.DexterityVest);
             var agedBrie = program.Item(ShopItem.AgedBrie);
@@ -106,14 +98,9 @@ namespace GildedRose.Tests
         [Fact]
         public void not_increase_quality_of_an_item_above_maximum_quality_of_50()
         {
-            var program = Program.CreateProgram();
-
             const int maximumItemQuality = 50;
             const int timesToUpdateQualityBy = maximumItemQuality + 1;
-            for (var i = 0; i < timesToUpdateQualityBy; i++)
-            {
-                program.UpdateQuality();
-            }
+            var program = new ProgramBuilder().WithUpdatedQuality(timesToUpdateQualityBy).Build();
 
             var agedBrie = program.Item(ShopItem.AgedBrie);
             
@@ -125,12 +112,7 @@ namespace GildedRose.Tests
         [InlineData(2, 2, 0)]
         public void increase_the_quality_of_aged_brie_by_1_when_sell_in_not_negative(int timesToUpdateQualityBy, int expectedQuality, int expectedSellIn)
         {
-            var program = Program.CreateProgram();
-
-            for (var i = 0; i < timesToUpdateQualityBy; i++)
-            {
-                program.UpdateQuality();
-            }
+            var program = new ProgramBuilder().WithUpdatedQuality(timesToUpdateQualityBy).Build();
 
             var agedBrie = program.Item(ShopItem.AgedBrie);
             
@@ -146,12 +128,7 @@ namespace GildedRose.Tests
         [InlineData(26, 50, -24)]
         public void increase_the_quality_of_aged_brie_by_2_when_sell_in_negative(int timesToUpdateQualityBy, int expectedQuality, int expectedSellIn)
         {
-            var program = Program.CreateProgram();
-
-            for (var i = 0; i < timesToUpdateQualityBy; i++)
-            {
-                program.UpdateQuality();
-            }
+            var program = new ProgramBuilder().WithUpdatedQuality(timesToUpdateQualityBy).Build();
 
             var agedBrie = program.Item(ShopItem.AgedBrie);
 
@@ -165,12 +142,7 @@ namespace GildedRose.Tests
         [InlineData(100, 50, -98)]
         public void never_increase_aged_brie_quality_above_maximum_quality_of_50(int timesToUpdateQualityBy, int expectedQuality, int expectedSellIn)
         {
-            var program = Program.CreateProgram();
-
-            for (var i = 0; i < timesToUpdateQualityBy; i++)
-            {
-                program.UpdateQuality();
-            }
+            var program = new ProgramBuilder().WithUpdatedQuality(timesToUpdateQualityBy).Build();
 
             var agedBrie = program.Item(ShopItem.AgedBrie);
 
@@ -181,8 +153,7 @@ namespace GildedRose.Tests
         [Fact]
         public void never_decrease_sulfuras_item_sell_in_when_quality_is_updated()
         {
-            var program = Program.CreateProgram();
-            program.UpdateQuality();
+            var program = new ProgramBuilder().WithUpdatedQuality(1).Build();
 
             var sulfuras = program.Item(ShopItem.Sulfuras);
 
@@ -194,16 +165,31 @@ namespace GildedRose.Tests
         [Fact]
         public void never_change_quality_of_sulfuras_when_quality_is_updated()
         {
-            var program = Program.CreateProgram();
+            var program = new ProgramBuilder().WithUpdatedQuality(100).Build(); 
             var sulfuras = program.Item(ShopItem.Sulfuras);
-
-            const int timesToUpdateQualityBy = 100;
-            for (var i = 0; i < timesToUpdateQualityBy; i++)
-            {
-                program.UpdateQuality();
-            }
 
             Assert.Equal(sulfuras.Quality, 80);
         }
+    }
+
+    internal class ProgramBuilder
+    {
+        private readonly Program _program;
+
+        public ProgramBuilder()
+        {
+            _program = Program.CreateProgram();
+        }
+
+        public ProgramBuilder WithUpdatedQuality(int times)
+        {
+            for (var i = 0; i < times; i++)
+            {
+                _program.UpdateQuality();
+            }
+            return this;
+        }
+
+        public Program Build() => _program;
     }
 }
