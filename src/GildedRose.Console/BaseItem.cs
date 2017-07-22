@@ -41,6 +41,13 @@ namespace GildedRose.Console
 
             UpdateNormalItem(currenItemIsNormalItem);
 
+            UpdateAgedBrie(itemIsAgedBrie);
+
+            UpdateBackstagePasses(itemIsBackstagePasses);
+        }
+
+        private void UpdateAgedBrie(bool itemIsAgedBrie)
+        {
             if (itemIsAgedBrie && QualityBelowMaxQuality())
             {
                 Quality = Quality + 1;
@@ -50,8 +57,6 @@ namespace GildedRose.Console
             {
                 Quality = Quality + 1;
             }
-
-            UpdateBackstagePasses(itemIsBackstagePasses);
         }
 
         private void UpdateNormalItem(bool currenItemIsNormalItem)
