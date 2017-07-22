@@ -101,17 +101,17 @@ namespace GildedRose.Console
                 item.SellIn = item.SellIn - 1;
                 itemQualityAboveZero = item.Quality > 0;
 
-                if (item.SellIn < 0 && itemIsNotAgedBrie && itemQualityAboveZero && itemIsNotBackstagePasses && itemIsNotSulfuras)
+                if (item.SellIn < 0 && itemQualityAboveZero && itemIsNotAgedBrie && itemIsNotBackstagePasses && itemIsNotSulfuras)
                 {
                     item.Quality = item.Quality - 1;
                 }
 
-                if (item.SellIn < 0 && itemIsNotAgedBrie && itemQualityAboveZero && itemIsBackstagePasses)
+                if (item.SellIn < 0 && itemQualityAboveZero && itemIsNotAgedBrie && itemIsBackstagePasses)
                 {
                     item.Quality = item.Quality - item.Quality;
                 }
 
-                if (item.SellIn < 0 && itemIsAgedBrie && itemQualityBelowMaxQuality)
+                if (item.SellIn < 0 && itemQualityBelowMaxQuality && itemIsAgedBrie)
                 {
                     item.Quality = item.Quality + 1;
                 }
