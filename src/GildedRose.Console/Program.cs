@@ -74,17 +74,19 @@ namespace GildedRose.Console
                     item.Quality = item.Quality - 1;
                 }
 
-                if (currentItemIsNotNormalItem && item.Quality < 50)
+                const int maxItemQuality = 50;
+
+                if (currentItemIsNotNormalItem && item.Quality < maxItemQuality)
                 {
                     item.Quality = item.Quality + 1;
                 }
 
-                if (currentItemIsNotNormalItem && itemIsBackstagePasses && item.SellIn < 11 && item.Quality < 50)
+                if (currentItemIsNotNormalItem && itemIsBackstagePasses && item.SellIn < 11 && item.Quality < maxItemQuality)
                 {
                     item.Quality = item.Quality + 1;
                 }
 
-                if (currentItemIsNotNormalItem && itemIsBackstagePasses && item.SellIn < 6 && item.Quality < 50)
+                if (currentItemIsNotNormalItem && itemIsBackstagePasses && item.SellIn < 6 && item.Quality < maxItemQuality)
                 {
                     item.Quality = item.Quality + 1;
                 }
@@ -106,7 +108,7 @@ namespace GildedRose.Console
                     item.Quality = item.Quality - item.Quality;
                 }
 
-                if (item.Name == "Aged Brie" && item.Quality < 50)
+                if (item.Name == "Aged Brie" && item.Quality < maxItemQuality)
                 {
                     item.Quality = item.Quality + 1;
                 }
