@@ -90,12 +90,9 @@ namespace GildedRose.Console
                 {
                     if (currentItem.Name != "Aged Brie")
                     {
-                        if (currentItem.Name != "Backstage passes to a TAFKAL80ETC concert")
+                        if (currentItem.Name != "Backstage passes to a TAFKAL80ETC concert" && currentItem.Quality > 0 && currentItem.Name != "Sulfuras, Hand of Ragnaros")
                         {
-                            if (currentItem.Quality > 0 && currentItem.Name != "Sulfuras, Hand of Ragnaros")
-                            {
-                                currentItem.Quality = currentItem.Quality - 1;
-                            }
+                            currentItem.Quality = currentItem.Quality - 1;
                         }
                         else
                         {
