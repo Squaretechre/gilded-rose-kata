@@ -1,5 +1,23 @@
 namespace GildedRose.Console
 {
+    public class NormalItem : BaseItem
+    {
+        public override void UpdateQuality()
+        {
+            SellIn = SellIn - 1;
+
+            if (QualityAboveZero())
+            {
+                Quality = Quality - 1;
+            }
+
+            if (SellIn < 0 && QualityAboveZero())
+            {
+                Quality = Quality - 1;
+            }
+        }
+    }
+
     public class BaseItem : Item
     {
         private int _quality;
@@ -21,25 +39,15 @@ namespace GildedRose.Console
             set => _quality = value;
         }
 
-        public void UpdateQuality()
+        public virtual void UpdateQuality()
         {
-            var itemIsNotAgedBrie = Name != AgedBrie;
-            var itemIsNotSulfuras = Name != SulfurasHandOfRagnaros;
-            var itemIsNotBackstagePasses = Name != BackstagePasses;
-
             var itemIsBackstagePasses = Name == BackstagePasses;
             var itemIsSulfuras = Name == SulfurasHandOfRagnaros;
             var itemIsAgedBrie = Name == AgedBrie;
 
-            var currenItemIsNormalItem = itemIsNotSulfuras &&
-                                         itemIsNotAgedBrie &&
-                                         itemIsNotBackstagePasses;
-
             if (itemIsSulfuras) return;
 
             SellIn = SellIn - 1;
-
-            UpdateNormalItem(currenItemIsNormalItem);
 
             UpdateAgedBrie(itemIsAgedBrie);
 
@@ -56,19 +64,6 @@ namespace GildedRose.Console
             if (itemIsAgedBrie && SellIn < 0 && QualityBelowMaxQuality())
             {
                 Quality = Quality + 1;
-            }
-        }
-
-        private void UpdateNormalItem(bool currenItemIsNormalItem)
-        {
-            if (currenItemIsNormalItem && QualityAboveZero())
-            {
-                Quality = Quality - 1;
-            }
-
-            if (currenItemIsNormalItem && SellIn < 0 && QualityAboveZero())
-            {
-                Quality = Quality - 1;
             }
         }
 
@@ -100,7 +95,7 @@ namespace GildedRose.Console
             return Quality < MaxItemQuality;
         }
 
-        private bool QualityAboveZero()
+        public bool QualityAboveZero()
         {
             return Quality > 0;
         }
