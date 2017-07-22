@@ -17,6 +17,9 @@ namespace GildedRose.Console.Items
             {
                 ItemQuality = MaxItemQuality;
             }
+
+            if (ItemQuality <= 0) ItemQuality = 0;
+
             return ItemQuality;
         }
 

@@ -44,6 +44,7 @@
     <Compile Include="Items\ItemAgedBrie.cs" />
     <Compile Include="Items\ItemBackstagePasses.cs" />
     <Compile Include="Items\BaseItem.cs" />
+    <Compile Include="Items\ItemConjured.cs" />
     <Compile Include="Items\ItemNormal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

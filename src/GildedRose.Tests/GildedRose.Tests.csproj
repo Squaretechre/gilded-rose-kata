@@ -59,7 +59,7 @@
   <ItemGroup>
     <Compile Include="ItemAgedBrieShould.cs" />
     <Compile Include="ItemBackstagePassesShould.cs" />
-    <Compile Include="ConjuredItemsShould.cs" />
+    <Compile Include="ItemConjuredShould.cs" />
     <Compile Include="ItemNormalShould.cs" />
     <Compile Include="ProgramBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
