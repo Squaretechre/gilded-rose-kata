@@ -1,47 +1,10 @@
 namespace GildedRose.Console
 {
-    public class NormalItem : BaseItem
-    {
-        public override void UpdateQuality()
-        {
-            SellIn = SellIn - 1;
-
-            if (QualityAboveZero())
-            {
-                Quality = Quality - 1;
-            }
-
-            if (SellIn < 0 && QualityAboveZero())
-            {
-                Quality = Quality - 1;
-            }
-        }
-    }
-
-    public class AgedBrie : BaseItem
-    {
-        public override void UpdateQuality()
-        {
-            SellIn = SellIn - 1;
-            
-            if (QualityBelowMaxQuality())
-            {
-                Quality = Quality + 1;
-            }
-
-            if (SellIn < 0 && QualityBelowMaxQuality())
-            {
-                Quality = Quality + 1;
-            }
-        }
-    }
-
     public class BaseItem : Item
     {
         protected int _quality;
         protected const int MaxItemQuality = 50;
         private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
-        private const string AgedBrie = "Aged Brie";
         private const string BackstagePasses = "Backstage passes to a TAFKAL80ETC concert";
 
         public new int Quality
@@ -61,7 +24,6 @@ namespace GildedRose.Console
         {
             var itemIsBackstagePasses = Name == BackstagePasses;
             var itemIsSulfuras = Name == SulfurasHandOfRagnaros;
-            var itemIsAgedBrie = Name == AgedBrie;
 
             if (itemIsSulfuras) return;
 
