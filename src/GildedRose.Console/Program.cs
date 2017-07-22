@@ -86,25 +86,24 @@ namespace GildedRose.Console
                     currentItem.SellIn = currentItem.SellIn - 1;
                 }
 
-                if (currentItem.SellIn < 0)
+                if (currentItem.SellIn >= 0) continue;
+
+                if (currentItem.Name != "Aged Brie")
                 {
-                    if (currentItem.Name != "Aged Brie")
+                    if (currentItem.Name != "Backstage passes to a TAFKAL80ETC concert" && currentItem.Quality > 0 && currentItem.Name != "Sulfuras, Hand of Ragnaros")
                     {
-                        if (currentItem.Name != "Backstage passes to a TAFKAL80ETC concert" && currentItem.Quality > 0 && currentItem.Name != "Sulfuras, Hand of Ragnaros")
-                        {
-                            currentItem.Quality = currentItem.Quality - 1;
-                        }
-                        else
-                        {
-                            currentItem.Quality = currentItem.Quality - currentItem.Quality;
-                        }
+                        currentItem.Quality = currentItem.Quality - 1;
                     }
                     else
                     {
-                        if (currentItem.Quality < 50)
-                        {
-                            currentItem.Quality = currentItem.Quality + 1;
-                        }
+                        currentItem.Quality = currentItem.Quality - currentItem.Quality;
+                    }
+                }
+                else
+                {
+                    if (currentItem.Quality < 50)
+                    {
+                        currentItem.Quality = currentItem.Quality + 1;
                     }
                 }
             }
