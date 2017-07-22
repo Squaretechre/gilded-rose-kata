@@ -106,14 +106,14 @@ namespace GildedRose.Console
                     item.Quality = item.Quality + 1;
                 }
 
+                if (currentItemIsNotNormalItem && itemIsBackstagePasses && item.SellIn < 0 && item.Quality > 0)
+                {
+                    item.Quality = item.Quality - item.Quality;
+                }
+
                 if (itemIsBackstagePasses && itemIsOverMaxQuality)
                 {
                     item.Quality = 0;
-                }
-
-                if (itemIsBackstagePasses && itemIsNotAgedBrie && item.SellIn < 0 && item.Quality > 0)
-                {
-                    item.Quality = item.Quality - item.Quality;
                 }
 
                 if (itemIsAgedBrie && item.SellIn < 0 && itemQualityBelowMaxQuality)
