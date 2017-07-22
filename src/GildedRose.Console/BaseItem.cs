@@ -29,7 +29,7 @@ namespace GildedRose.Console
                 Quality = Quality - 1;
             }
 
-            if (currenItemIsNormalItem && SellIn < 0 && Quality > 0)
+            if (currenItemIsNormalItem && SellIn < 0 && ItemQualityAboveZero())
             {
                 Quality = Quality - 1;
             }
@@ -54,7 +54,7 @@ namespace GildedRose.Console
                 Quality = Quality + 3;
             }
 
-            if (itemIsBackstagePasses && SellIn < 0 && Quality > 0)
+            if (itemIsBackstagePasses && SellIn < 0 && ItemQualityAboveZero())
             {
                 Quality = Quality - Quality;
             }
