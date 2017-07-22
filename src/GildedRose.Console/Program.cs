@@ -77,6 +77,7 @@ namespace GildedRose.Console
 
                 var itemQualityAboveZero = item.Quality > 0;
                 var itemQualityBelowMaxQuality = item.Quality < maxItemQuality;
+                var itemIsOverMaxQuality = !itemQualityBelowMaxQuality;
 
                 item.SellIn = item.SellIn - 1;
 
@@ -115,14 +116,14 @@ namespace GildedRose.Console
                     item.Quality = item.Quality + 1;
                 }
 
+                if (itemIsBackstagePasses && itemIsOverMaxQuality)
+                {
+                    item.Quality = 0;
+                }
+
                 if (item.Quality > maxItemQuality)
                 {
                     item.Quality = maxItemQuality;
-                }
-
-                if (itemIsBackstagePasses && !itemQualityBelowMaxQuality)
-                {
-                    item.Quality = 0;
                 }
             }
         }
