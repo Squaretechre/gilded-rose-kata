@@ -99,12 +99,10 @@ namespace GildedRose.Console
                         currentItem.Quality = currentItem.Quality - currentItem.Quality;
                     }
                 }
-                else
+
+                if (currentItem.Name == "Aged Brie" && currentItem.Quality < 50)
                 {
-                    if (currentItem.Quality < 50)
-                    {
-                        currentItem.Quality = currentItem.Quality + 1;
-                    }
+                    currentItem.Quality = currentItem.Quality + 1;
                 }
             }
         }
